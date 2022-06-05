@@ -1,4 +1,4 @@
-sudo rm -rf /var/www/npp-qna/build
-sudo npm run build
+#!/bin/bash
+# Stop all servers and start the server
 forever stopall
-forever start -c "node -r esm" Server.js
+forever start /home/ubuntu/npp-qna-web/app.js
