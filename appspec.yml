@@ -1,8 +1,8 @@
-Version: 0.0.1
-os: linux
+version: 0.0
+os: linux 
 files:
   - source: /
-    destination: /var/www/html
+    destination: /home/ubuntu/npp-qna-web
 hooks:
   BeforeInstall:
     - location: scripts/before_install.sh
