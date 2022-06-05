@@ -25,6 +25,6 @@ pipelines:
                 S3_BUCKET: $S3_BUCKET
                 WAIT: 'true'
                 COMMAND: 'deploy'
-                VERSION_LABEL: 'application-1.0.0'
+                VERSION_LABEL: 'react-app-1.0.0'
                 IGNORE_APPLICATION_STOP_FAILURES: 'true'
                 FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
