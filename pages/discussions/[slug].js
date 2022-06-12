@@ -14,19 +14,19 @@ import CommentItem from '../../components/post/comment-list/comment-item'
 import AnswerContainer from '../../components/answer-container'
 import AddResponse from '../../components/add-response'
 import { Spinner } from '../../components/icons'
-import { RESPONSE_TYPE } from '../../constants'
+import { RESPONSE_TYPE, THREAD_TYPE } from '../../constants'
 
-const QuestionDetail = ({ questionId, title }) => {
-  const [question, setQuestion] = useState(null)
+const DiscussionDetail = ({ discussionId, title }) => {
+  const [discussion, setDiscussion] = useState(null)
   const [answerSortType, setAnswersSortType] = useState('Votes')
 
   useEffect(() => {
-    const fetchQuestion = async () => {
-      const { data } = await publicFetch.get(`/question/${questionId}`)
-      setQuestion(data)
+    const fetchDiscussion = async () => {
+      const { data } = await publicFetch.get(`/discussion/${discussionId}`)
+      setDiscussion(data)
     }
 
-    fetchQuestion()
+    fetchDiscussion()
   }, [])
 
   const handleSorting = () => {
@@ -47,50 +47,50 @@ const QuestionDetail = ({ questionId, title }) => {
   return (
     <Layout extra={false}>
       <Head>
-        { question &&
-          <title>{question.title}</title>
+        { discussion &&
+          <title>{discussion.title}</title>
         }
-        { !question &&
+        { !discussion &&
           <title>{title}</title>
         }
         <link rel="canonical" href={isClient? window.location.href: undefined}></link>
       </Head>
 
       <DetailPageContainer>
-        {!question && (
+        {!discussion && (
           <div className="loading">
             <Spinner />
           </div>
         )}
 
-        {question && (
+        {discussion && (
           <>
-            <PageTitle title={question.title} create='Ask Question' createComp='/questions/ask' />
+            <PageTitle title={discussion.title} create='Start Discussion' createComp='/discussions/start' />
             <PostWrapper borderBottom={false}>
               <PostVote
-                score={question.score}
-                votes={question.votes}
-                questionId={questionId}
-                setQuestion={setQuestion}
+                score={discussion.score}
+                votes={discussion.votes}
+                discussionId={discussionId}
+                setDiscussion={setDiscussion}
               />
               <PostSummary
-                tags={question.tags}
-                author={question.author}
-                created={question.created}
-                questionId={questionId}
+                tags={discussion.tags}
+                author={discussion.author}
+                created={discussion.created}
+                discussionId={discussionId}
               >
-                {question.text}
+                {discussion.text}
               </PostSummary>
-              <CommentList questionId={questionId} setQuestion={setQuestion}>
-                {question.comments.map(({ id, author, created, body }) => (
+              <CommentList discussionId={discussionId} setDiscussion={setDiscussion}>
+                {discussion.comments.map(({ id, author, created, body }) => (
                   <CommentItem
                     key={id}
                     commentId={id}
-                    questionId={questionId}
+                    discussionId={discussionId}
                     author={author.username}
-                    isOwner={author.username === question.author.username}
+                    isOwner={author.username === discussion.author.username}
                     created={created}
-                    setQuestion={setQuestion}
+                    setDiscussion={setDiscussion}
                   >
                     {body}
                   </CommentItem>
@@ -98,45 +98,45 @@ const QuestionDetail = ({ questionId, title }) => {
               </CommentList>
             </PostWrapper>
 
-            {question.answers.length > 0 && (
+            {discussion.answers.length > 0 && (
               <AnswerContainer
-                answersCount={question.answers.length}
+                answersCount={discussion.answers.length}
                 answerSortType={answerSortType}
                 setAnswerSortType={setAnswersSortType}
               >
-                {question.answers.sort(handleSorting()).map((answer) => (
+                {discussion.answers.sort(handleSorting()).map((answer) => (
                   <PostWrapper key={answer.id}>
                     <PostVote
                       score={answer.score}
                       votes={answer.votes}
                       answerId={answer.id}
-                      questionId={questionId}
-                      setQuestion={setQuestion}
+                      discussionId={discussionId}
+                      setDiscussion={setDiscussion}
                     />
                     <PostSummary
                       author={answer.author}
                       created={answer.created}
-                      questionId={questionId}
+                      discussionId={discussionId}
                       answerId={answer.id}
-                      setQuestion={setQuestion}
+                      setDiscussion={setDiscussion}
                     >
                       {answer.text}
                     </PostSummary>
                     <CommentList
-                      questionId={questionId}
+                      discussionId={discussionId}
                       answerId={answer.id}
-                      setQuestion={setQuestion}
+                      setDiscussion={setDiscussion}
                     >
                       {answer.comments.map(({ id, author, created, body }) => (
                         <CommentItem
                           key={id}
                           commentId={id}
-                          questionId={questionId}
+                          discussionId={discussionId}
                           answerId={answer.id}
                           author={author.username}
-                          isOwner={author.username === question.author.username}
+                          isOwner={author.username === discussion.author.username}
                           created={created}
-                          setQuestion={setQuestion}
+                          setDiscussion={setDiscussion}
                         >
                           {body}
                         </CommentItem>
@@ -146,23 +146,12 @@ const QuestionDetail = ({ questionId, title }) => {
                 ))}
               </AnswerContainer>
             )}
-            { /* TODO: do we need this existing FAQ tag logic here? */ }
-            { !question.tags.includes("FAQ") &&
-                <AddResponse
-                  tags={question.tags}
-                  type={RESPONSE_TYPE.ANSWER}
-                  id={questionId}
-                  setResponse={setQuestion}
-                />
-            }
-            { question.answers.length == 0 && question.tags.includes("FAQ") &&
-                <AddResponse
-                  tags={question.tags}
-                  type={RESPONSE_TYPE.ANSWER}
-                  id={questionId}
-                  setResponse={setQuestion}
-                />
-            }
+            <AddResponse
+                tags={discussion.tags}
+                type={RESPONSE_TYPE.RESPONSE}
+                id={discussionId}
+                setResponse={setDiscussion}
+            />
           </>
         )}
       </DetailPageContainer>
@@ -172,7 +161,7 @@ const QuestionDetail = ({ questionId, title }) => {
 
 export async function getServerSideProps(context) {
   const slug = context.params.slug
-  const questionId = slug.split('-').shift()
+  const discussionId = slug.split('-').shift()
   const title = slug
     ?.substr(slug.indexOf('-') + 1)
     .split('-')
@@ -180,10 +169,10 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      questionId,
+      discussionId,
       title
     }
   }
 }
 
-export default QuestionDetail
+export default DiscussionDetail

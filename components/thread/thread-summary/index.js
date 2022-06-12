@@ -5,9 +5,10 @@ import slug from 'slug'
 
 import Tag from '../../tag'
 
-import styles from './question-summary.module.css'
+import styles from './thread-summary.module.css'
 
-const QuestionSummary = ({
+const ThreadSummary = ({
+  type,
   id,
   title,
   tags,
@@ -17,7 +18,7 @@ const QuestionSummary = ({
 }) => {
   return (
     <div className={styles.container}>
-      <Link href="/questions/[slug]" as={`/questions/${id}-${slug(title)}`}>
+      <Link href={`/${type}/[slug]`} as={`/${type}/${id}-${slug(title)}`}>
         <a className={styles.link}>{title}</a>
       </Link>
       <div className={styles.excerpt}>{children}</div>
@@ -53,4 +54,4 @@ const QuestionSummary = ({
   )
 }
 
-export default QuestionSummary
+export default ThreadSummary

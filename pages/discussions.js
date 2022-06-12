@@ -13,29 +13,29 @@ import ButtonGroup from '../components/button-group'
 import { Spinner } from '../components/icons'
 import { THREAD_TYPE } from '../constants'
 
-const HomePage = () => {
+const DiscussionsPage = () => {
   const router = useRouter()
 
-  const [questions, setQuestions] = useState(null)
-  const [sortType, setSortType] = useState('Votes')
+  const [discussions, setDiscussions] = useState(null);
+  const [sortType, setSortType] = useState('Votes');
 
   useEffect(() => {
-    const fetchQuestion = async () => {
-      const { data } = await publicFetch.get('/questions')
-      setQuestions(data)
+    const fetchDiscussions = async () => {
+      const { data } = await publicFetch.get('/discussions');
+      setDiscussions(data);
     }
 
-    const fetchQuestionByTag = async () => {
-      const { data } = await publicFetch.get(`/questions/${router.query.tag}`)
-      setQuestions(data)
+    const fetchDiscussionsByTag = async () => {
+      const { data } = await publicFetch.get(`/discussions/${router.query.tag}`);
+      setDiscussions(data)
     }
 
     if (router.query.tag) {
-      fetchQuestionByTag()
+      fetchDiscussionsByTag();
     } else {
-      fetchQuestion()
+      fetchDiscussions();
     }
-  }, [router.query.tag])
+  }, [router.query.tag]);
 
   const handleSorting = () => {
     switch (sortType) {
@@ -56,14 +56,13 @@ const HomePage = () => {
     <Layout>
       <Head>
         <title>
-          {router.query.tag ? router.query.tag : 'Questions'} - NPP Q&A
+          {router.query.tag ? router.query.tag : 'Discussions'} - NPP Q&A
         </title>
       </Head>
 
-      <PageTitle
-        title={router.query.tag ? `Questions tagged [${router.query.tag}]` : 'All Questions'}
-        create='Ask Question'
-        createComp='/questions/ask'
+      <PageTitle title={router.query.tag ? `Discussions tagged [${router.query.tag}]` : 'All Discussions'}
+        create='Start Discussion'
+        createComp='/discussions/start'
         borderBottom={false}
       />
 
@@ -74,13 +73,13 @@ const HomePage = () => {
         setSelected={setSortType}
       />
 
-      {!questions && (
+      {!discussions && (
         <div className="loading">
           <Spinner />
         </div>
       )}
 
-      {questions
+      {discussions
         ?.sort(handleSorting())
         .map(
           ({
@@ -101,7 +100,7 @@ const HomePage = () => {
                 view={views}
               />
               <ThreadSummary
-                type={THREAD_TYPE.QUESTIONS}
+                type={THREAD_TYPE.DISCUSSIONS}
                 id={id}
                 title={title}
                 tags={tags}
@@ -117,4 +116,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default DiscussionsPage
