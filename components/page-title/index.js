@@ -7,7 +7,7 @@ import Button from '../button'
 
 import styles from './page-title.module.css'
 
-const PageTitle = ({ title, button, borderBottom = true, children }) => {
+const PageTitle = ({ title, create, createComp, borderBottom = true, start, children }) => {
   const { isAuthenticated } = useContext(AuthContext)
 
   return (
@@ -15,12 +15,12 @@ const PageTitle = ({ title, button, borderBottom = true, children }) => {
       <div className={styles.title}>
         <h1>{title}</h1>
         <div className={styles.buttonContainer}>
-          {button && (
+          {create && (
             <Button
-              href={isAuthenticated() ? '/questions/ask' : '/auth'}
+              href={isAuthenticated() ? createComp : '/auth'}
               primary
             >
-              Ask Question
+              {create}
             </Button>
           )}
         </div>

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import styles from './question-stats.module.css'
+import styles from './thread-stats.module.css'
 
-const QuestionStats = ({ voteCount, answerCount, view }) => {
+const ThreadStats = ({ voteCount, answerCount, view }) => {
   return (
     <div className={styles.container}>
       <div className={styles.vote}>
@@ -18,4 +18,4 @@ const QuestionStats = ({ voteCount, answerCount, view }) => {
   )
 }
 
-export default QuestionStats
+export default ThreadStats

@@ -17,14 +17,18 @@ const Navigation = () => {
           router.pathname == '/' || router.pathname.split('/')[1] == 'questions'
         }
       >
-        <World />
-        <span>Home - NPP Q&A</span>
+        <span>Q&A</span>
+      </NavItem>
+      <NavItem href="/discussions" selected={router.pathname == '/discussions'}>
+        <span>Discussions</span>
+      </NavItem>
+      <NavItem href="/faq" selected={router.pathname == '/faq'}>
+        <span>FAQ</span>
       </NavItem>
 
       <NavItem href="/tags" selected={router.pathname == '/tags'}>
         <span>Tags</span>
       </NavItem>
-
       <NavItem
         href="/users"
         selected={router.pathname.split('/')[1] == 'users'}

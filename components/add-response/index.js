@@ -11,9 +11,9 @@ import TextArea from '../textarea'
 import Button from '../button'
 import Tag from '../tag'
 
-import styles from './add-answer.module.css'
+import styles from './add-response.module.css'
 
-const AddAnswer = ({ id, tags, setQuestion }) => {
+const AddResponse = ({ type, id, tags, setResponse }) => {
   const { authAxios } = useContext(FetchContext)
   const { isAuthenticated } = useContext(AuthContext)
   const { handleComponentVisible } = useContext(ModalContext)
@@ -26,8 +26,8 @@ const AddAnswer = ({ id, tags, setQuestion }) => {
       onSubmit={async (values, { setStatus, resetForm }) => {
         setLoading(true)
         try {
-          const { data } = await authAxios.post(`/answer/${id}`, values)
-          setQuestion(data)
+          const { data } = await authAxios.post(`/${type}/${id}`, values)
+          setResponse(data)
           resetForm({})
         } catch (error) {
           setStatus(error.response.data.message)
@@ -80,6 +80,7 @@ const AddAnswer = ({ id, tags, setQuestion }) => {
             {tags.map((tag) => (
               <Tag key={tag}>{tag}</Tag>
             ))}
+            {/* TODO: do we need this link? for discussions? */}
             or &nbsp;
             <Link href="/questions/ask" as="/questions/ask">
               <a>ask your own question.</a>
@@ -91,4 +92,4 @@ const AddAnswer = ({ id, tags, setQuestion }) => {
   )
 }
 
-export default AddAnswer
+export default AddResponse
