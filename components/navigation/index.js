@@ -2,7 +2,6 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 import NavItem from './nav-item'
-import { World } from '../icons'
 
 import styles from './navigation.module.css'
 
@@ -20,9 +19,9 @@ const Navigation = () => {
         <span>Q&A</span>
       </NavItem>
       <NavItem href="/discussions" selected={router.pathname == '/discussions'}>
-        <span>Discussions</span>
+        <span>Discussion</span>
       </NavItem>
-      <NavItem href="/faq" selected={router.pathname == '/faq'}>
+      <NavItem href="/faqs" selected={router.pathname == '/faqs'}>
         <span>FAQ</span>
       </NavItem>
 
