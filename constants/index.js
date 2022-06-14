@@ -6,7 +6,7 @@ export default {
 export const THREAD_TYPE = {
   QUESTIONS: 'questions',
   DISCUSSIONS: 'discussions',
-  FAQ: 'faq',
+  FAQ: 'faqs',
 };
 
 export const RESPONSE_TYPE = {
