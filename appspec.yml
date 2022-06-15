@@ -3,6 +3,7 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/npp-qna-web
+    overwrite: true
 hooks:
   BeforeInstall:
     - location: scripts/before_install.sh
