@@ -16,7 +16,7 @@ const UserDetail = ({ username }) => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const { data } = await publicFetch.get(`/question/user/${username}`)
+      const { data } = await publicFetch.get(`/questions/user/${username}`)
       setPosts(data)
     }
     fetchQuestions()
@@ -25,7 +25,7 @@ const UserDetail = ({ username }) => {
   return (
     <Layout extra={false}>
       <Head>
-        <title>Users {username} - Clone of Stackoverflow</title>
+        <title>Users {username} - NPP Q&A</title>
       </Head>
 
       <UserCard>

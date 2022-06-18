@@ -56,7 +56,7 @@
     margin-left: 10px;
 
     a {
-      width: min-content;
+      width: max-content;
     }
   }
 }

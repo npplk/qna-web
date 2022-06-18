@@ -8,7 +8,7 @@ import { Spinner } from '../../icons'
 
 import styles from './avatar-card.module.css'
 
-const UserAvatar = ({ username }) => {
+const UserAvatar = ({ username, displayname }) => {
   const [userInfo, setUserInfo] = useState(null)
 
   useEffect(() => {
@@ -39,7 +39,8 @@ const UserAvatar = ({ username }) => {
             </Link>
           </div>
         )}
-        <h2 className={styles.username}>{username}</h2>
+        {userInfo && <h2 className={styles.displayname}>{userInfo.displayname}</h2>}
+        <h4 className={styles.username}>({username})</h4>
         {!userInfo ? (
           <div className="loading">
             <Spinner />

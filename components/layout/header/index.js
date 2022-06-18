@@ -56,7 +56,7 @@ const Header = ({ className, ...props }) => {
                 href="/users/[user]"
                 as={`/users/${authState.userInfo.username}`}
               >
-                <a>{authState.userInfo.username}!</a>
+                <a>{authState.userInfo.displayname} </a>
               </Link>
             </p>
             <a onClick={() => logout()}>log out</a>

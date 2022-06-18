@@ -10,7 +10,7 @@ import Textarea from '../../textarea'
 import FormInput from '../../form-input'
 import TagInput from '../../tag-input'
 
-import styles from './question-form.module.css'
+import styles from './create-thread-form.module.css'
 
 const QuestionForm = () => {
   const router = useRouter()
@@ -24,7 +24,7 @@ const QuestionForm = () => {
       onSubmit={async (values, { setStatus, resetForm }) => {
         setLoading(true)
         try {
-          await authAxios.post('questions', values)
+          await authAxios.post('question', values)
           resetForm({})
           router.push('/')
         } catch (error) {

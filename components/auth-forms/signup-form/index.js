@@ -34,6 +34,12 @@ const SignupForm = () => {
         setLoading(false)
       }}
       validationSchema={Yup.object({
+        displayname: Yup.string()
+          .required('Required')
+          .max(30, 'Must be at most 30 characters long'),
+        email: Yup.string()
+          .required('Required')
+          .max(30, 'Must be at most 30 characters long'),
         username: Yup.string()
           .required('Required')
           .max(16, 'Must be at most 16 characters long')
@@ -59,6 +65,28 @@ const SignupForm = () => {
         isSubmitting
       }) => (
         <form onSubmit={handleSubmit} className={styles.form}>
+          <FormInput
+            label="Name"
+            type="text"
+            name="displayname"
+            autoComplete="off"
+            value={values.displayname}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            hasError={touched.displayname && errors.displayname}
+            errorMessage={errors.displayname && errors.displayname}
+          />
+          <FormInput
+            label="Email"
+            type="text"
+            name="email"
+            autoComplete="off"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            hasError={touched.email && errors.email}
+            errorMessage={errors.email && errors.email}
+          />
           <FormInput
             label="Username"
             type="text"
