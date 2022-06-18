@@ -67,7 +67,7 @@ const PostSummary = ({
                 })}
               </span>
               <Link href="/users/[user]" as={`/users/${author.username}`}>
-                <a>{author.username}</a>
+                <a>{author.displayname}</a>
               </Link>
             </div>
           </div>

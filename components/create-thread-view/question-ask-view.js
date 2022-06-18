@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './question-ask-view.module.css'
+import styles from './create-thread-view.module.css'
 
 const QuestionAskView = ({ children }) => {
   return (

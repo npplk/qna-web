@@ -18,8 +18,16 @@
   }
 }
 
-.username {
+.displayname {
   font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.username {
+  font-size: 14px;
   font-weight: bold;
   line-height: 1;
   margin-top: 10px;
