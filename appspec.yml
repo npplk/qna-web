@@ -1,14 +1,9 @@
 version: 0.0
-os: linux 
+os: linux
 files:
   - source: /
     destination: /home/ubuntu/npp-qna-web
     overwrite: true
-permissions:
-- object: /
-   pattern: "**"
-   owner: ubuntu
-   group: ubuntu
 hooks:
   BeforeInstall:
     - location: scripts/before_install.sh
