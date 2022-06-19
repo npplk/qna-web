@@ -9,6 +9,7 @@ import { FetchContext } from '../../../store/fetch'
 import Tag from '../../tag'
 
 import styles from './post-summary.module.css'
+import { getAvatar } from '../../../util/avatar'
 
 const PostSummary = ({
   tags,
@@ -54,7 +55,7 @@ const PostSummary = ({
             <Link href="/users/[user]" as={`/users/${author.username}`}>
               <a>
                 <img
-                  src={`https://secure.gravatar.com/avatar/${author.id}?s=32&d=identicon`}
+                  src={getAvatar(author, 32)}
                   alt={author.username}
                 />
               </a>

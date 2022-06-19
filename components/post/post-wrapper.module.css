@@ -3,6 +3,11 @@
   grid-template-columns: max-content 1fr;
   padding-top: 16px;
   padding-bottom: 16px;
+  
+  &.adminPost {
+    background-color: #971f5d1c;
+    color: #000;
+  }
 }
 
 .borderBottom {

@@ -105,7 +105,7 @@ const DiscussionDetail = ({ discussionId, title }) => {
                 setAnswerSortType={setAnswersSortType}
               >
                 {discussion.answers.sort(handleSorting()).map((answer) => (
-                  <PostWrapper key={answer.id}>
+                  <PostWrapper key={answer.id} isAdminPost={answer.author.role === 'admin'}>
                     <PostVote
                       score={answer.score}
                       votes={answer.votes}
