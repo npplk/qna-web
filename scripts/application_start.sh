@@ -1,5 +1,5 @@
 #!/bin/bash
 # Stop all servers and start the server
-echo "$PWD"
+cd /home/ubuntu/npp-qna-web
 forever stopall
 forever start -c "npm run start" ./
