@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
-
+import { getAvatar } from '../../../util/avatar'
 import { publicFetch } from '../../../util/fetcher'
 
 import { Spinner } from '../../icons'
 
 import styles from './avatar-card.module.css'
 
-const UserAvatar = ({ username, displayname }) => {
+const UserAvatar = ({ username }) => {
   const [userInfo, setUserInfo] = useState(null)
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const UserAvatar = ({ username, displayname }) => {
             <Link href="/users/[username]" as={`/users/${username}`}>
               <a>
                 <img
-                  src={`https://secure.gravatar.com/avatar/${userInfo.id}?s=164&d=identicon`}
+                  src={getAvatar(userInfo, 164)}
                   alt={username}
                 />
               </a>
