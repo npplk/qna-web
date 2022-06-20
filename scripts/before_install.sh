@@ -1,6 +1,6 @@
 #!/bin/bash
 # Install node.js and Forever.js
-sudo apt-get update
-sudo apt-get install nodejs -y
-sudo apt-get install npm  -y
-sudo npm install forever -g
+apt-get update
+apt-get install nodejs -y
+apt-get install npm  -y
+npm install forever -g
