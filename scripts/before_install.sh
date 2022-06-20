@@ -6,5 +6,6 @@ apt-get update
 curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh -o install_nvm.sh
 bash install_nvm.sh
 source ~/.bashrc
+source ~/.nvm/nvm.sh
 nvm install --lts
 npm install forever -g
