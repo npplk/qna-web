@@ -36,7 +36,6 @@ phases:
     commands:
       - echo Build starting
       - echo Compiling the React code
-      - npm run build
   post_build:
     commands:
       - echo Build completed
