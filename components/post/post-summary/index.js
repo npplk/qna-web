@@ -18,6 +18,7 @@ const PostSummary = ({
   questionId,
   answerId,
   setQuestion,
+  isUserDetailsVisible = true,
   children
 }) => {
   const { authState, isAdmin } = useContext(AuthContext)
@@ -51,7 +52,7 @@ const PostSummary = ({
               <Tag key={tag}>{tag}</Tag>
             ))}
           </div>
-          <div className={styles.userDetails}>
+          {isUserDetailsVisible && <div className={styles.userDetails}>
             <Link href="/users/[user]" as={`/users/${author.username}`}>
               <a>
                 <img
@@ -71,7 +72,7 @@ const PostSummary = ({
                 <a>{author.displayname}</a>
               </Link>
             </div>
-          </div>
+          </div>}
         </div>
         {(authState.userInfo?.id === author.id || isAdmin()) && (
           <div className={styles.row}>

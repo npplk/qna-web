@@ -59,18 +59,20 @@ const FaqDetail = ({ faqId, title }) => {
                 author={faq.author}
                 created={faq.created}
                 faqId={faqId}
+                isUserDetailsVisible={false}
               >
                 {faq.question}
               </PostSummary>
             </PostWrapper>
-            <PostWrapper key="faq-answer">
-                <PostSummary
-                    author={faq.author}
-                    created={faq.created}
-                    questionId={faqId}
-                >
-                    {faq.answer}
-                </PostSummary>
+            <PostWrapper key="faq-answer" adminAnswer={true} borderBottom={false}>
+              <PostSummary
+                author={faq.author}
+                created={faq.created}
+                questionId={faqId}
+                isUserDetailsVisible={false}
+              >
+                {faq.answer}
+              </PostSummary>
             </PostWrapper>
           </>
         )}

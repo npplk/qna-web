@@ -97,8 +97,8 @@ const HomePage = () => {
             <ThreadWrapper key={id}>
               <ThreadStats
                 voteCount={votes.length}
-                answerCount={answers.length}
                 view={views}
+                threadType={THREAD_TYPE.QUESTIONS}
               />
               <ThreadSummary
                 type={THREAD_TYPE.QUESTIONS}

@@ -14,7 +14,7 @@ import CommentItem from '../../components/post/comment-list/comment-item'
 import AnswerContainer from '../../components/answer-container'
 import AddResponse from '../../components/add-response'
 import { Spinner } from '../../components/icons'
-import { RESPONSE_TYPE } from '../../constants'
+import { RESPONSE_TYPE, THREAD_TYPE } from '../../constants'
 
 const QuestionDetail = ({ questionId, title }) => {
   const [question, setQuestion] = useState(null)
@@ -103,16 +103,10 @@ const QuestionDetail = ({ questionId, title }) => {
                 answersCount={question.answers.length}
                 answerSortType={answerSortType}
                 setAnswerSortType={setAnswersSortType}
+                threadType={THREAD_TYPE.QUESTIONS}
               >
                 {question.answers.sort(handleSorting()).map((answer) => (
-                  <PostWrapper key={answer.id} isAdminPost={answer.author.role === 'admin'}>
-                    <PostVote
-                      score={answer.score}
-                      votes={answer.votes}
-                      answerId={answer.id}
-                      questionId={questionId}
-                      setQuestion={setQuestion}
-                    />
+                  <PostWrapper key={answer.id}>
                     <PostSummary
                       author={answer.author}
                       created={answer.created}
@@ -146,15 +140,6 @@ const QuestionDetail = ({ questionId, title }) => {
                 ))}
               </AnswerContainer>
             )}
-            { /* TODO: do we need this existing FAQ tag logic here? */ }
-            { !question.tags.includes("FAQ") &&
-                <AddResponse
-                  tags={question.tags}
-                  type={RESPONSE_TYPE.ANSWER}
-                  id={questionId}
-                  setResponse={setQuestion}
-                />
-            }
             { question.answers.length == 0 && question.tags.includes("FAQ") &&
                 <AddResponse
                   tags={question.tags}

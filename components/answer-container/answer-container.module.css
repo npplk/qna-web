@@ -9,6 +9,11 @@
   margin-bottom: 10px;
 }
 
+.adminAnswer {
+  padding-left: 40px;
+  border-left: 2px solid var(--theme-main-color);
+}
+
 .fill {
   flex: 1;
 

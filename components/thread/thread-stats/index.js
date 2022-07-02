@@ -11,7 +11,7 @@ const ThreadStats = ({ voteCount, answerCount = null, view }) => {
       </div>
       {answerCount !== null && <div className={styles.answer}>
         <span>{answerCount}</span>
-        <p>answers</p>
+        <p>replies</p>
       </div>}
       <p className={styles.view}>{view} views</p>
     </div>
