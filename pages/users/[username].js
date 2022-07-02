@@ -58,7 +58,7 @@ const UserDetail = ({ username }) => {
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getstaticprops(context) {
   const username = context.params.username
   return {
     props: {

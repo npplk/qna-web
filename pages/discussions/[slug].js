@@ -47,13 +47,12 @@ const DiscussionDetail = ({ discussionId, title }) => {
   return (
     <Layout extra={false}>
       <Head>
-        { discussion &&
-          <title>{discussion.title}</title>
-        }
-        { !discussion &&
-          <title>{title}</title>
-        }
-        <link rel="canonical" href={isClient? window.location.href: undefined}></link>
+        {discussion && <title>{discussion.title}</title>}
+        {!discussion && <title>{title}</title>}
+        <link
+          rel="canonical"
+          href={isClient ? window.location.href : undefined}
+        ></link>
       </Head>
 
       <DetailPageContainer>
@@ -65,7 +64,11 @@ const DiscussionDetail = ({ discussionId, title }) => {
 
         {discussion && (
           <>
-            <PageTitle title={discussion.title} create='Start Discussion' createComp='/discussions/start' />
+            <PageTitle
+              title={discussion.title}
+              create="Start Discussion"
+              createComp="/discussions/start"
+            />
             <PostWrapper borderBottom={false}>
               <PostVote
                 score={discussion.score}
@@ -81,7 +84,10 @@ const DiscussionDetail = ({ discussionId, title }) => {
               >
                 {discussion.text}
               </PostSummary>
-              <CommentList discussionId={discussionId} setDiscussion={setDiscussion}>
+              <CommentList
+                discussionId={discussionId}
+                setDiscussion={setDiscussion}
+              >
                 {discussion.comments.map(({ id, author, created, body }) => (
                   <CommentItem
                     key={id}
@@ -106,7 +112,10 @@ const DiscussionDetail = ({ discussionId, title }) => {
                 threadType={THREAD_TYPE.DISCUSSIONS}
               >
                 {discussion.answers.sort(handleSorting()).map((answer) => (
-                  <PostWrapper key={answer.id} isAdminPost={answer.author.role === 'admin'}>
+                  <PostWrapper
+                    key={answer.id}
+                    isAdminPost={answer.author.role === 'admin'}
+                  >
                     <PostVote
                       score={answer.score}
                       votes={answer.votes}
@@ -135,7 +144,9 @@ const DiscussionDetail = ({ discussionId, title }) => {
                           discussionId={discussionId}
                           answerId={answer.id}
                           author={author.username}
-                          isOwner={author.username === discussion.author.username}
+                          isOwner={
+                            author.username === discussion.author.username
+                          }
                           created={created}
                           setDiscussion={setDiscussion}
                         >
@@ -148,10 +159,10 @@ const DiscussionDetail = ({ discussionId, title }) => {
               </AnswerContainer>
             )}
             <AddResponse
-                tags={discussion.tags}
-                type={RESPONSE_TYPE.RESPONSE}
-                id={discussionId}
-                setResponse={setDiscussion}
+              tags={discussion.tags}
+              type={RESPONSE_TYPE.RESPONSE}
+              id={discussionId}
+              setResponse={setDiscussion}
             />
           </>
         )}
@@ -160,7 +171,7 @@ const DiscussionDetail = ({ discussionId, title }) => {
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getstaticprops(context) {
   const slug = context.params.slug
   const discussionId = slug.split('-').shift()
   const title = slug
