@@ -96,6 +96,7 @@ const FaqsPage = () => {
               <ThreadStats
                 voteCount={votes.length}
                 view={views}
+                threadType={THREAD_TYPE.FAQ}
               />
               <ThreadSummary
                 type={THREAD_TYPE.FAQ}

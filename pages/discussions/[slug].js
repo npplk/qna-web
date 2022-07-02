@@ -14,7 +14,7 @@ import CommentItem from '../../components/post/comment-list/comment-item'
 import AnswerContainer from '../../components/answer-container'
 import AddResponse from '../../components/add-response'
 import { Spinner } from '../../components/icons'
-import { RESPONSE_TYPE } from '../../constants'
+import { RESPONSE_TYPE, THREAD_TYPE } from '../../constants'
 
 const DiscussionDetail = ({ discussionId, title }) => {
   const [discussion, setDiscussion] = useState(null)
@@ -103,6 +103,7 @@ const DiscussionDetail = ({ discussionId, title }) => {
                 answersCount={discussion.answers.length}
                 answerSortType={answerSortType}
                 setAnswerSortType={setAnswersSortType}
+                threadType={THREAD_TYPE.DISCUSSIONS}
               >
                 {discussion.answers.sort(handleSorting()).map((answer) => (
                   <PostWrapper key={answer.id} isAdminPost={answer.author.role === 'admin'}>

@@ -98,6 +98,7 @@ const DiscussionsPage = () => {
                 voteCount={votes.length}
                 answerCount={answers.length}
                 view={views}
+                threadType={THREAD_TYPE.DISCUSSIONS}
               />
               <ThreadSummary
                 type={THREAD_TYPE.DISCUSSIONS}

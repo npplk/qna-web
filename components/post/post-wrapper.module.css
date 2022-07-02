@@ -5,11 +5,16 @@
   padding-bottom: 16px;
   
   &.adminPost {
-    background-color: #971f5d1c;
+    background-color: #ff6eb930;
     color: #000;
   }
 }
 
 .borderBottom {
   border-bottom: 1px solid var(--black-075);
+}
+
+.adminAnswer {
+  padding-left: 40px;
+  border-left: 2px solid var(--theme-main-color);
 }
