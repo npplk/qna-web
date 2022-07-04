@@ -47,13 +47,12 @@ const QuestionDetail = ({ questionId, title }) => {
   return (
     <Layout extra={false}>
       <Head>
-        { question &&
-          <title>{question.title}</title>
-        }
-        { !question &&
-          <title>{title}</title>
-        }
-        <link rel="canonical" href={isClient? window.location.href: undefined}></link>
+        {question && <title>{question.title}</title>}
+        {!question && <title>{title}</title>}
+        <link
+          rel="canonical"
+          href={isClient ? window.location.href : undefined}
+        ></link>
       </Head>
 
       <DetailPageContainer>
@@ -65,7 +64,11 @@ const QuestionDetail = ({ questionId, title }) => {
 
         {question && (
           <>
-            <PageTitle title={question.title} create='Ask Question' createComp='/questions/ask' />
+            <PageTitle
+              title={question.title}
+              create="Ask Question"
+              createComp="/questions/ask"
+            />
             <PostWrapper borderBottom={false}>
               <PostVote
                 score={question.score}
@@ -140,14 +143,14 @@ const QuestionDetail = ({ questionId, title }) => {
                 ))}
               </AnswerContainer>
             )}
-            { question.answers.length == 0 && question.tags.includes("FAQ") &&
-                <AddResponse
-                  tags={question.tags}
-                  type={RESPONSE_TYPE.ANSWER}
-                  id={questionId}
-                  setResponse={setQuestion}
-                />
-            }
+            {question.answers.length == 0 && question.tags.includes('FAQ') && (
+              <AddResponse
+                tags={question.tags}
+                type={RESPONSE_TYPE.ANSWER}
+                id={questionId}
+                setResponse={setQuestion}
+              />
+            )}
           </>
         )}
       </DetailPageContainer>
@@ -155,7 +158,7 @@ const QuestionDetail = ({ questionId, title }) => {
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getstaticprops(context) {
   const slug = context.params.slug
   const questionId = slug.split('-').shift()
   const title = slug

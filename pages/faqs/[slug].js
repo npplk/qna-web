@@ -28,13 +28,12 @@ const FaqDetail = ({ faqId, title }) => {
   return (
     <Layout extra={false}>
       <Head>
-        { faq &&
-          <title>{faq.title}</title>
-        }
-        { !faq &&
-          <title>{title}</title>
-        }
-        <link rel="canonical" href={isClient? window.location.href: undefined}></link>
+        {faq && <title>{faq.title}</title>}
+        {!faq && <title>{title}</title>}
+        <link
+          rel="canonical"
+          href={isClient ? window.location.href : undefined}
+        ></link>
       </Head>
 
       <DetailPageContainer>
@@ -46,7 +45,11 @@ const FaqDetail = ({ faqId, title }) => {
 
         {faq && (
           <>
-            <PageTitle title={faq.title} create='Add FAQ' createComp='/faqs/add' />
+            <PageTitle
+              title={faq.title}
+              create="Add FAQ"
+              createComp="/faqs/add"
+            />
             <PostWrapper key="faq-question" borderBottom={false}>
               <PostVote
                 score={faq.score}
@@ -64,7 +67,11 @@ const FaqDetail = ({ faqId, title }) => {
                 {faq.question}
               </PostSummary>
             </PostWrapper>
-            <PostWrapper key="faq-answer" adminAnswer={true} borderBottom={false}>
+            <PostWrapper
+              key="faq-answer"
+              adminAnswer={true}
+              borderBottom={false}
+            >
               <PostSummary
                 author={faq.author}
                 created={faq.created}
@@ -81,7 +88,7 @@ const FaqDetail = ({ faqId, title }) => {
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getstaticprops(context) {
   const slug = context.params.slug
   const faqId = slug.split('-').shift()
   const title = slug
