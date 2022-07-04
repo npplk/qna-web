@@ -4,7 +4,6 @@ version: 0.2
 #variables:
 # key: "value"
 # key: "value"
-SITE_NAME: 'ec2-13-213-51-67.ap-southeast-1.compute.amazonaws.com'
 #parameter-store:
 # key: "value"
 # key: "value"
@@ -38,6 +37,7 @@ phases:
     commands:
       - echo Build starting
       - echo Compiling the React code
+      - export SITE_NAME=ec2-13-213-51-67.ap-southeast-1.compute.amazonaws.com
       - npm run build
   post_build:
     commands:
