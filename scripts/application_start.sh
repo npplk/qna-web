@@ -9,4 +9,4 @@ pm2 stop npp-qna-web
 pm2 delete npp-qna-web
 # forever stopall
 # forever start -c "yarn run start" ./
-pm2 start yarn --name npp-qna-web -- start
+pm2 start npm --name npp-qna-web -- start
