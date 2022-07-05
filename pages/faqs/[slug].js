@@ -88,7 +88,7 @@ const FaqDetail = ({ faqId, title }) => {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const slug = context.params.slug
   const faqId = slug.split('-').shift()
   const title = slug
