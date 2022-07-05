@@ -37,12 +37,12 @@ phases:
     commands:
       - echo Build starting
       - echo Compiling the React code
-      - export SITE_NAME=ec2-13-213-51-67.ap-southeast-1.compute.amazonaws.com
-      - npm run build
+      # - export SITE_NAME=ec2-13-213-51-67.ap-southeast-1.compute.amazonaws.com
+      # - npm run build
   post_build:
     commands:
       - echo Build completed
-      - npm run export
+      # - npm run export
       # - command
 #reports:
 #report-name-or-arn:
@@ -58,7 +58,7 @@ artifacts:
     # - location
   #name: $(date +%Y-%m-%d)
   discard-paths: no
-  base-directory: out
+  # base-directory: out
 #cache:
 #paths:
 # - paths
