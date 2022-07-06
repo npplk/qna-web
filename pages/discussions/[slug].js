@@ -171,7 +171,7 @@ const DiscussionDetail = ({ discussionId, title }) => {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const slug = context.params.slug
   const discussionId = slug.split('-').shift()
   const title = slug

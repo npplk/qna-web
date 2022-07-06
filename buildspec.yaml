@@ -24,7 +24,7 @@ phases:
     #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
     #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
     runtime-versions:
-      nodejs: 16
+      nodejs: 14
       # name: version
     commands:
       - echo Installing Node
@@ -32,17 +32,17 @@ phases:
   pre_build:
     commands:
       - echo Installing source NPM dependencies
-      - npm install
+      # - npm install
   build:
     commands:
       - echo Build starting
       - echo Compiling the React code
-      - export SITE_NAME=ec2-13-213-51-67.ap-southeast-1.compute.amazonaws.com
-      - npm run build
+      # - export SITE_NAME=ec2-13-213-51-67.ap-southeast-1.compute.amazonaws.com
+      # - npm run build
   post_build:
     commands:
       - echo Build completed
-      - npm run export
+      # - npm run export
       # - command
 #reports:
 #report-name-or-arn:
@@ -58,7 +58,7 @@ artifacts:
     # - location
   #name: $(date +%Y-%m-%d)
   discard-paths: no
-  base-directory: out
+  # base-directory: out
 #cache:
 #paths:
 # - paths
