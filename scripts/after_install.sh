@@ -6,3 +6,4 @@
 cd /home/ubuntu/npp-qna-web
 # yarn install
 # yarn run build
+npm install
