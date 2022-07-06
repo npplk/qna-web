@@ -143,7 +143,7 @@ const QuestionDetail = ({ questionId, title }) => {
                 ))}
               </AnswerContainer>
             )}
-            {question.answers.length == 0 && question.tags.includes('FAQ') && (
+            {question.answers.length == 0 && (
               <AddResponse
                 tags={question.tags}
                 type={RESPONSE_TYPE.ANSWER}
@@ -173,12 +173,5 @@ export async function getServerSideProps(context) {
     }
   }
 }
-
-// export async function getStaticPaths() {
-//   return {
-//     paths: [],
-//     fallback: 'blocking'
-//   }
-// }
 
 export default QuestionDetail
