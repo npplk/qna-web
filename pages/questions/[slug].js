@@ -111,7 +111,7 @@ const QuestionDetail = ({ questionId, title }) => {
                 threadType={THREAD_TYPE.QUESTIONS}
               >
                 {question.answers.sort(handleSorting()).map((answer) => (
-                  <PostWrapper key={answer.id}>
+                  <PostWrapper key={answer.id} borderBottom={false}>
                     <PostSummary
                       author={answer.author}
                       created={answer.created}
