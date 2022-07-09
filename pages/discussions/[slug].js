@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 
 import { publicFetch } from '../../util/fetcher'
-
 import Layout from '../../components/layout'
 import PageTitle from '../../components/page-title'
 import DetailPageContainer from '../../components/detail-page-container'
@@ -73,8 +72,9 @@ const DiscussionDetail = ({ discussionId, title }) => {
               <PostVote
                 score={discussion.score}
                 votes={discussion.votes}
-                discussionId={discussionId}
-                setDiscussion={setDiscussion}
+                threadType={THREAD_TYPE.DISCUSSIONS}
+                threadId={discussionId}
+                setThread={setDiscussion}
               />
               <PostSummary
                 tags={discussion.tags}
@@ -86,7 +86,7 @@ const DiscussionDetail = ({ discussionId, title }) => {
               </PostSummary>
               <CommentList
                 discussionId={discussionId}
-                setDiscussion={setDiscussion}
+                setThread={setDiscussion}
               >
                 {discussion.comments.map(({ id, author, created, body }) => (
                   <CommentItem
@@ -120,8 +120,9 @@ const DiscussionDetail = ({ discussionId, title }) => {
                       score={answer.score}
                       votes={answer.votes}
                       answerId={answer.id}
-                      discussionId={discussionId}
-                      setDiscussion={setDiscussion}
+                      threadType={THREAD_TYPE.DISCUSSIONS}
+                      threadId={discussionId}
+                      setThread={setDiscussion}
                     />
                     <PostSummary
                       author={answer.author}
@@ -186,12 +187,5 @@ export async function getServerSideProps(context) {
     }
   }
 }
-
-// export async function getStaticPaths() {
-//   return {
-//     paths: [],
-//     fallback: 'blocking'
-//   }
-// }
 
 export default DiscussionDetail

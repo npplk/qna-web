@@ -9,7 +9,7 @@ import { ArrowUp, ArrowDown } from '../../icons'
 
 import styles from './post-vote.module.css'
 
-const PostVote = ({ score, votes, questionId, answerId, setQuestion }) => {
+const PostVote = ({ score, votes, threadType, threadId, answerId, setThread }) => {
   const { authState, isAuthenticated } = useContext(AuthContext)
   const { authAxios } = useContext(FetchContext)
   const { handleComponentVisible } = useContext(ModalContext)
@@ -24,23 +24,23 @@ const PostVote = ({ score, votes, questionId, answerId, setQuestion }) => {
 
   const upVote = async () => {
     const { data } = await authAxios.get(
-      `/votes/upvote/${questionId}/${answerId ? answerId : ''}`
+      `/votes/upvote/${threadType}/${threadId}/${answerId ? answerId : ''}`
     )
-    setQuestion(data)
+    setThread(data)
   }
 
   const downVote = async () => {
     const { data } = await authAxios.get(
-      `/votes/downvote/${questionId}/${answerId ? answerId : ''}`
+      `/votes/downvote/${threadType}/${threadId}/${answerId ? answerId : ''}`
     )
-    setQuestion(data)
+    setThread(data)
   }
 
   const unVote = async () => {
     const { data } = await authAxios.get(
-      `/votes/unvote/${questionId}/${answerId ? answerId : ''}`
+      `/votes/unvote/${threadType}/${threadId}/${answerId ? answerId : ''}`
     )
-    setQuestion(data)
+    setThread(data)
   }
 
   return (

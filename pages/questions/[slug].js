@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Head from 'next/head'
 
 import { publicFetch } from '../../util/fetcher'
-
 import Layout from '../../components/layout'
 import PageTitle from '../../components/page-title'
 import DetailPageContainer from '../../components/detail-page-container'
@@ -15,10 +14,12 @@ import AnswerContainer from '../../components/answer-container'
 import AddResponse from '../../components/add-response'
 import { Spinner } from '../../components/icons'
 import { RESPONSE_TYPE, THREAD_TYPE } from '../../constants'
+import { AuthContext } from '../../store/auth'
 
 const QuestionDetail = ({ questionId, title }) => {
   const [question, setQuestion] = useState(null)
   const [answerSortType, setAnswersSortType] = useState('Votes')
+  const { isAdmin } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -73,8 +74,9 @@ const QuestionDetail = ({ questionId, title }) => {
               <PostVote
                 score={question.score}
                 votes={question.votes}
-                questionId={questionId}
-                setQuestion={setQuestion}
+                threadType={THREAD_TYPE.QUESTIONS}
+                threadId={questionId}
+                setThread={setQuestion}
               />
               <PostSummary
                 tags={question.tags}
@@ -143,7 +145,7 @@ const QuestionDetail = ({ questionId, title }) => {
                 ))}
               </AnswerContainer>
             )}
-            {question.answers.length == 0 && (
+            {question.answers.length == 0 && isAdmin() && (
               <AddResponse
                 tags={question.tags}
                 type={RESPONSE_TYPE.ANSWER}
