@@ -13,7 +13,7 @@ import CommentItem from '../../components/post/comment-list/comment-item'
 import AnswerContainer from '../../components/answer-container'
 import AddResponse from '../../components/add-response'
 import { Spinner } from '../../components/icons'
-import { RESPONSE_TYPE, THREAD_TYPE } from '../../constants'
+import { THREAD_TYPE } from '../../constants'
 
 const DiscussionDetail = ({ discussionId, title }) => {
   const [discussion, setDiscussion] = useState(null)
@@ -80,23 +80,25 @@ const DiscussionDetail = ({ discussionId, title }) => {
                 tags={discussion.tags}
                 author={discussion.author}
                 created={discussion.created}
-                discussionId={discussionId}
+                threadType={THREAD_TYPE.DISCUSSIONS}
+                threadId={discussionId}
               >
                 {discussion.text}
               </PostSummary>
               <CommentList
-                discussionId={discussionId}
+                threadType={THREAD_TYPE.DISCUSSIONS}
+                threadId={discussionId}
                 setThread={setDiscussion}
               >
                 {discussion.comments.map(({ id, author, created, body }) => (
                   <CommentItem
                     key={id}
                     commentId={id}
-                    discussionId={discussionId}
+                    threadId={discussionId}
                     author={author.username}
                     isOwner={author.username === discussion.author.username}
                     created={created}
-                    setDiscussion={setDiscussion}
+                    setThread={setDiscussion}
                   >
                     {body}
                   </CommentItem>
@@ -127,29 +129,31 @@ const DiscussionDetail = ({ discussionId, title }) => {
                     <PostSummary
                       author={answer.author}
                       created={answer.created}
-                      discussionId={discussionId}
+                      threadType={THREAD_TYPE.DISCUSSIONS}
+                      threadId={discussionId}
                       answerId={answer.id}
-                      setDiscussion={setDiscussion}
+                      setThread={setDiscussion}
                     >
                       {answer.text}
                     </PostSummary>
                     <CommentList
-                      discussionId={discussionId}
+                      threadType={THREAD_TYPE.DISCUSSIONS}
+                      threadId={discussionId}
                       answerId={answer.id}
-                      setDiscussion={setDiscussion}
+                      setThread={setDiscussion}
                     >
                       {answer.comments.map(({ id, author, created, body }) => (
                         <CommentItem
                           key={id}
                           commentId={id}
-                          discussionId={discussionId}
+                          threadId={discussionId}
                           answerId={answer.id}
                           author={author.username}
                           isOwner={
                             author.username === discussion.author.username
                           }
                           created={created}
-                          setDiscussion={setDiscussion}
+                          setThread={setDiscussion}
                         >
                           {body}
                         </CommentItem>
@@ -161,8 +165,8 @@ const DiscussionDetail = ({ discussionId, title }) => {
             )}
             <AddResponse
               tags={discussion.tags}
-              type={RESPONSE_TYPE.RESPONSE}
-              id={discussionId}
+              threadType={THREAD_TYPE.DISCUSSIONS}
+              threadId={discussionId}
               setResponse={setDiscussion}
             />
           </>

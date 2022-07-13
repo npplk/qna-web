@@ -13,7 +13,7 @@ import CommentItem from '../../components/post/comment-list/comment-item'
 import AnswerContainer from '../../components/answer-container'
 import AddResponse from '../../components/add-response'
 import { Spinner } from '../../components/icons'
-import { RESPONSE_TYPE, THREAD_TYPE } from '../../constants'
+import { THREAD_TYPE } from '../../constants'
 import { AuthContext } from '../../store/auth'
 
 const QuestionDetail = ({ questionId, title }) => {
@@ -82,20 +82,25 @@ const QuestionDetail = ({ questionId, title }) => {
                 tags={question.tags}
                 author={question.author}
                 created={question.created}
-                questionId={questionId}
+                threadType={THREAD_TYPE.QUESTIONS}
+                threadId={questionId}
               >
                 {question.text}
               </PostSummary>
-              <CommentList questionId={questionId} setQuestion={setQuestion}>
+              <CommentList
+                threadType={THREAD_TYPE.QUESTIONS}
+                threadId={questionId}
+                setThread={setQuestion}
+              >
                 {question.comments.map(({ id, author, created, body }) => (
                   <CommentItem
                     key={id}
                     commentId={id}
-                    questionId={questionId}
+                    threadId={questionId}
                     author={author.username}
                     isOwner={author.username === question.author.username}
                     created={created}
-                    setQuestion={setQuestion}
+                    setThread={setQuestion}
                   >
                     {body}
                   </CommentItem>
@@ -115,27 +120,29 @@ const QuestionDetail = ({ questionId, title }) => {
                     <PostSummary
                       author={answer.author}
                       created={answer.created}
-                      questionId={questionId}
+                      threadType={THREAD_TYPE.QUESTIONS}
+                      threadId={questionId}
                       answerId={answer.id}
-                      setQuestion={setQuestion}
+                      setThread={setQuestion}
                     >
                       {answer.text}
                     </PostSummary>
                     <CommentList
-                      questionId={questionId}
+                      threadType={THREAD_TYPE.QUESTIONS}
+                      threadId={questionId}
                       answerId={answer.id}
-                      setQuestion={setQuestion}
+                      setThread={setQuestion}
                     >
                       {answer.comments.map(({ id, author, created, body }) => (
                         <CommentItem
                           key={id}
                           commentId={id}
-                          questionId={questionId}
+                          threadId={questionId}
                           answerId={answer.id}
                           author={author.username}
                           isOwner={author.username === question.author.username}
                           created={created}
-                          setQuestion={setQuestion}
+                          setThread={setQuestion}
                         >
                           {body}
                         </CommentItem>
@@ -148,8 +155,8 @@ const QuestionDetail = ({ questionId, title }) => {
             {question.answers.length == 0 && isAdmin() && (
               <AddResponse
                 tags={question.tags}
-                type={RESPONSE_TYPE.ANSWER}
-                id={questionId}
+                threadType={THREAD_TYPE.QUESTIONS}
+                threadId={questionId}
                 setResponse={setQuestion}
               />
             )}

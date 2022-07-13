@@ -9,9 +9,10 @@ import styles from './comment-list.module.css'
 
 const CommentList = ({
   children,
-  questionId,
+  threadType,
+  threadId,
   answerId,
-  setQuestion,
+  setThread,
 }) => {
   const { isAuthenticated } = useContext(AuthContext)
   const { handleComponentVisible } = useContext(ModalContext)
@@ -53,10 +54,11 @@ const CommentList = ({
 
       {showAddComment && (
         <AddComment
-          questionId={questionId}
+          threadType={threadType}
+          threadId={threadId}
           answerId={answerId}
           setShowAddComment={setShowAddComment}
-          setQuestion={setQuestion}
+          setThread={setThread}
         />
       )}
     </div>

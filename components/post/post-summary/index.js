@@ -15,9 +15,10 @@ const PostSummary = ({
   tags,
   author,
   created,
-  questionId,
+  threadType,
+  threadId,
   answerId,
-  setQuestion,
+  setThread,
   isUserDetailsVisible = true,
   children
 }) => {
@@ -30,12 +31,12 @@ const PostSummary = ({
     if (res) {
       const { data } = await authAxios.delete(
         answerId
-          ? `/answer/${questionId}/${answerId}`
-          : `/question/${questionId}`
+          ? `/answer/${threadType}/${threadId}/${answerId}`
+          : `${threadType}/${threadId}`
       )
 
       if (answerId) {
-        setQuestion(data)
+        setThread(data)
       } else {
         router.push('/')
       }

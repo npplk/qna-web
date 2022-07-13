@@ -62,7 +62,8 @@ const FaqDetail = ({ faqId, title }) => {
                 tags={faq.tags}
                 author={faq.author}
                 created={faq.created}
-                faqId={faqId}
+                threadType={THREAD_TYPE.FAQ}
+                threadId={faqId}
                 isUserDetailsVisible={false}
               >
                 {faq.question}
@@ -76,7 +77,8 @@ const FaqDetail = ({ faqId, title }) => {
               <PostSummary
                 author={faq.author}
                 created={faq.created}
-                questionId={faqId}
+                threadType={THREAD_TYPE.FAQ}
+                threadId={faqId}
                 isUserDetailsVisible={false}
               >
                 {faq.answer}

@@ -10,10 +10,11 @@ import Button from '../../button'
 import styles from './add-comment.module.css'
 
 const AddComment = ({
-  questionId,
+  threadType,
+  threadId,
   answerId,
   setShowAddComment,
-  setQuestion
+  setThread
 }) => {
   const { authAxios } = useContext(FetchContext)
 
@@ -26,11 +27,11 @@ const AddComment = ({
         setLoading(true)
         try {
           const { data } = await authAxios.post(
-            `/comment/${questionId}/${answerId ? answerId : ''}`,
+            `/comment/${threadType}/${threadId}/${answerId ? answerId : ''}`,
             values
           )
 
-          setQuestion(data)
+          setThread(data)
 
           resetForm({})
           setShowAddComment(false)

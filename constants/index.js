@@ -8,8 +8,3 @@ export const THREAD_TYPE = {
   DISCUSSIONS: 'discussions',
   FAQ: 'faqs',
 };
-
-export const RESPONSE_TYPE = {
-  ANSWER: 'answer',
-  RESPONSE: 'response',
-};

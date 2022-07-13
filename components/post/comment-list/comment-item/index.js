@@ -12,9 +12,9 @@ const CommentItem = ({
   created,
   isOwner,
   answerId,
-  questionId,
+  threadId,
   commentId,
-  setQuestion,
+  setThread,
   children
 }) => {
   const { authState, isAdmin } = useContext(AuthContext)
@@ -25,11 +25,11 @@ const CommentItem = ({
     if (res) {
       const { data } = await authAxios.delete(
         answerId
-          ? `/comment/${questionId}/${answerId}/${commentId}`
-          : `/comment/${questionId}/${commentId}`
+          ? `/comment/${threadId}/${answerId}/${commentId}`
+          : `/comment/${threadId}/${commentId}`
       )
 
-      setQuestion(data)
+      setThread(data)
     }
   }
 

@@ -13,7 +13,7 @@ import Tag from '../tag'
 
 import styles from './add-response.module.css'
 
-const AddResponse = ({ type, id, tags, setResponse }) => {
+const AddResponse = ({ threadType, threadId, tags, setResponse }) => {
   const { authAxios } = useContext(FetchContext)
   const { isAuthenticated } = useContext(AuthContext)
   const { handleComponentVisible } = useContext(ModalContext)
@@ -26,7 +26,7 @@ const AddResponse = ({ type, id, tags, setResponse }) => {
       onSubmit={async (values, { setStatus, resetForm }) => {
         setLoading(true)
         try {
-          const { data } = await authAxios.post(`/${type}/${id}`, values)
+          const { data } = await authAxios.post(`/answer/${threadType}/${threadId}`, values)
           setResponse(data)
           resetForm({})
         } catch (error) {
