@@ -4,7 +4,7 @@ import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
 
 import styles from './user-item.module.css'
 
-const UserItem = ({ username, profilePhoto, created }) => {
+const UserItem = ({ username, displayname, profilePhoto, created }) => {
   return (
     <div className={styles.card}>
       <div className={styles.avatar}>
@@ -16,7 +16,7 @@ const UserItem = ({ username, profilePhoto, created }) => {
       </div>
       <div className={styles.body}>
         <Link href="/users/[username]" as={`/users/${username}`}>
-          <a>{username}</a>
+          <a>{displayname}</a>
         </Link>
         <p>
           created{' '}
