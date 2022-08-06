@@ -66,7 +66,6 @@ const FaqForm = () => {
           <div className={styles.container}>
             <FormInput
               label="Title"
-              inputInfo="Be specific and imagine you’re asking a faq to another person"
               type="text"
               name="title"
               autoComplete="off"
@@ -75,7 +74,6 @@ const FaqForm = () => {
               onBlur={handleBlur}
               hasError={touched.title && errors.title}
               errorMessage={errors.title && errors.title}
-              placeholder="e.g Is there an R function for finding the index of an element in a vendor?"
             />
             <Textarea
               label="Question"
@@ -90,7 +88,7 @@ const FaqForm = () => {
             />
             <Textarea
               label="Answer"
-              inputInfo="frequently asked question - answer"
+              inputInfo="frequently asked question's' answer"
               name="answer"
               autoComplete="off"
               value={values.answer}
@@ -101,7 +99,7 @@ const FaqForm = () => {
             />
             <TagInput
               label="Tags"
-              inputInfo="Add up to 5 tags to describe what your faq is about"
+              inputInfo="Add up to 5 tags to describe what this faq is about"
               type="text"
               name="tags"
               value={values.tags}
@@ -120,7 +118,7 @@ const FaqForm = () => {
                 isLoading={loading}
                 disabled={isSubmitting}
               >
-                Post
+                Post FAQ
               </Button>
             </div>
           </div>

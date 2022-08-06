@@ -62,7 +62,7 @@ const DiscussionForm = () => {
           <div className={styles.container}>
             <FormInput
               label="Title"
-              inputInfo="Be specific and imagine you’re asking a discussion to another person"
+              inputInfo="Be specific and imagine you’re starting a discussion with others"
               type="text"
               name="title"
               autoComplete="off"
@@ -75,7 +75,7 @@ const DiscussionForm = () => {
             />
             <Textarea
               label="Body"
-              inputInfo="Include all the information someone would need to answer your discussion"
+              inputInfo="Include all the information someone would need to respond your discussion"
               name="text"
               autoComplete="off"
               value={values.text}
