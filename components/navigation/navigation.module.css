@@ -3,3 +3,8 @@
     position: sticky;
     width: auto;
 }
+
+.seperator {
+    margin-top: 15px;
+    border-top: 1px solid var(--black-100);
+}

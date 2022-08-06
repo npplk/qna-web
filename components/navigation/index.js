@@ -19,12 +19,12 @@ const Navigation = () => {
         <span>Q&A</span>
       </NavItem>
       <NavItem href="/discussions" selected={router.pathname == '/discussions'}>
-        <span>Discussion</span>
+        <span>Discussions</span>
       </NavItem>
       <NavItem href="/faqs" selected={router.pathname == '/faqs'}>
-        <span>FAQ</span>
+        <span>FAQs</span>
       </NavItem>
-
+      <div className={styles.seperator}></div>  
       <NavItem href="/tags" selected={router.pathname == '/tags'}>
         <span>Tags</span>
       </NavItem>
