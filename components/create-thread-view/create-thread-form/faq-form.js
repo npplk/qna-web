@@ -26,7 +26,7 @@ const FaqForm = () => {
         try {
           await authAxios.post('faq', values)
           resetForm({})
-          router.push('/')
+          router.push('/faqs')
         } catch (error) {
           setStatus(error.response.data.message)
         }
@@ -120,7 +120,7 @@ const FaqForm = () => {
                 isLoading={loading}
                 disabled={isSubmitting}
               >
-                Review your FAQ
+                Post
               </Button>
             </div>
           </div>

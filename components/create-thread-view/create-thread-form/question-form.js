@@ -105,7 +105,7 @@ const QuestionForm = () => {
                 isLoading={loading}
                 disabled={isSubmitting}
               >
-                Review your question
+                Post your question
               </Button>
             </div>
           </div>

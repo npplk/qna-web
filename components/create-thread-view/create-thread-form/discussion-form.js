@@ -26,7 +26,7 @@ const DiscussionForm = () => {
         try {
           await authAxios.post('discussion', values)
           resetForm({})
-          router.push('/')
+          router.push('/discussions')
         } catch (error) {
           setStatus(error.response.data.message)
         }
@@ -105,7 +105,7 @@ const DiscussionForm = () => {
                 isLoading={loading}
                 disabled={isSubmitting}
               >
-                Review your discussion
+                Post your discussion
               </Button>
             </div>
           </div>
