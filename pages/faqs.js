@@ -62,6 +62,7 @@ const FaqsPage = () => {
 
       <PageTitle title={router.query.tag ? `FAQs tagged [${router.query.tag}]` : 'All FAQs'}
         create='Add FAQ'
+        adminOnly={true}
         createComp='/faqs/add'
         borderBottom={false}
       />
