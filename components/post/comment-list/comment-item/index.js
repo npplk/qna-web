@@ -36,14 +36,14 @@ const CommentItem = ({
   return (
     <div className={styles.commentContainer}>
       <p>{children} –</p> &nbsp;
-      <Link href="/users/[user]" as={`/users/${author}`}>
-        <a className={isOwner ? styles.owner : undefined}>{author}</a>
+      <Link href="/users/[user]" as={`/users/${author.username}`}>
+        <a className={isOwner ? styles.owner : undefined}>{author.displayname}</a>
       </Link>
       &nbsp;
       <p className={styles.dateText}>
         {format(new Date(created), "MMM dd'`'yy 'at' k':'mm")}{' '}
       </p>
-      {(authState.userInfo?.username === author || isAdmin()) && (
+      {(authState.userInfo?.username === author.username || isAdmin()) && (
         <a className={styles.delete} onClick={() => handleDeleteComment()}>
           delete
         </a>

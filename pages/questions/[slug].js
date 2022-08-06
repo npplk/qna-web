@@ -97,7 +97,7 @@ const QuestionDetail = ({ questionId, title }) => {
                     key={id}
                     commentId={id}
                     threadId={questionId}
-                    author={author.username}
+                    author={author}
                     isOwner={author.username === question.author.username}
                     created={created}
                     setThread={setQuestion}
@@ -139,7 +139,7 @@ const QuestionDetail = ({ questionId, title }) => {
                           commentId={id}
                           threadId={questionId}
                           answerId={answer.id}
-                          author={author.username}
+                          author={author}
                           isOwner={author.username === question.author.username}
                           created={created}
                           setThread={setQuestion}
