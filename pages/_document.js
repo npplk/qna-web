@@ -52,7 +52,7 @@ class MyDocument extends Document {
           ></script>
 
           {/* favicon */}
-          <link rel="shortcut icon" href="/images/npp.png" />
+          <link rel="shortcut icon" href="/images/npp-logo.jpg" />
         </Head>
         <body>
           <Main />
