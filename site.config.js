@@ -1,11 +1,11 @@
 module.exports = {
-  title: 'Stackoverflow',
-  description: 'Where Developers Learn & Share',
-  siteUrl: 'https://clone-of-stackoverflow.vercel.app',
-  googleAnalytic: 'UA-149699646-1',
+  title: 'NPP Q&A',
+  description: 'NPP Q&A, Discussions and FAQs',
+  siteUrl: 'https://qna.npp.lk',
+  // googleAnalytic: 'UA-149699646-1',
   author: {
-    email: 'salihozdemir94@gmail.com',
-    name: 'Salih Özdemir'
+    email: 'teamsavikalpa@gmail.com',
+    name: 'Team Savikalpa'
   },
   lang: 'en'
 }

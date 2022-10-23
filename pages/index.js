@@ -18,7 +18,6 @@ const HomePage = () => {
   const router = useRouter()
 
   const [questions, setQuestions] = useState(null)
-  const [page, setPage] = useState(1);
   const [paging, setPaging] = useState({
     page: 1,
     count: 0,
@@ -27,10 +26,10 @@ const HomePage = () => {
   })
   const [sortType, setSortType] = useState('Newest')
 
-  const fetchQuestion = async (pageNo = 1) => {
+  const fetchQuestion = async () => {
     const { data } = await publicFetch.get('/questions', { 
       params: { 
-        page: pageNo,
+        page: router.query.page,
         sort: getSortingParam(sortType),
       }
     })
@@ -41,14 +40,12 @@ const HomePage = () => {
       limit: data.limit,
       totalPages: data.totalPages
     });
-
-    router.push(`/?page=${data.page}`, undefined, { shallow: true });
   }
   
-  const fetchQuestionByTag = async (pageNo = 1) => {
+  const fetchQuestionByTag = async () => {
     const { data } = await publicFetch.get(`/questions/${router.query.tag}`, { 
       params: { 
-        page: pageNo,
+        page: router.query.page,
         sort: getSortingParam(sortType),
       }
     })
@@ -59,30 +56,21 @@ const HomePage = () => {
       limit: data.limit,
       totalPages: data.totalPages
     });
-
-    router.push(`/?tag=${router.query.tag}&page=${data.page}`, undefined, { shallow: true });
   }
   
   useEffect(() => {
-    setPaging({
-      page: 1,
-      count: 0,
-      limit: 10,
-      totalPages: 0
-    });
-
     if (router.query.tag) {
       fetchQuestionByTag();
     } else {
       fetchQuestion();
     }
-  }, [router.query.tag, sortType]);
+  }, [router.query.tag, router.query.page, sortType]);
 
   const handlePageClick = (event) => {
     if (router.query.tag) {
-      fetchQuestionByTag(event.selected+1);
+      router.push(`/?tag=${router.query.tag}&page=${event.selected+1}`);
     } else {
-      fetchQuestion(event.selected+1);
+      router.push(`/?page=${event.selected+1}`);
     }
   };
 

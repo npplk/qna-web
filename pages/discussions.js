@@ -28,10 +28,10 @@ const DiscussionsPage = () => {
     totalPages: 0
   });
 
-  const fetchDiscussions = async (pageNo = 1) => {
+  const fetchDiscussions = async () => {
     const { data } = await publicFetch.get('/discussions', { 
       params: { 
-        page: pageNo,
+        page: router.query.page,
         sort: getSortingParam(sortType),
       }
     });
@@ -42,14 +42,12 @@ const DiscussionsPage = () => {
       limit: data.limit,
       totalPages: data.totalPages
     });
-
-    router.push(`/discussions?page=${data.page}`, undefined, { shallow: true });
   }
 
-  const fetchDiscussionsByTag = async (pageNo = 1) => {
+  const fetchDiscussionsByTag = async () => {
     const { data } = await publicFetch.get(`/discussions/${router.query.tag}`, { 
       params: { 
-        page: pageNo,
+        page: router.query.page,
         sort: getSortingParam(sortType),
       }
     });
@@ -60,30 +58,21 @@ const DiscussionsPage = () => {
       limit: data.limit,
       totalPages: data.totalPages
     });
-
-    router.push(`/discussions?tag=${router.query.tag}&page=${data.page}`, undefined, { shallow: true });
   }
 
   useEffect(() => {
-    setPaging({
-      page: 1,
-      count: 0,
-      limit: 10,
-      totalPages: 0
-    });
-
     if (router.query.tag) {
       fetchDiscussionsByTag();
     } else {
       fetchDiscussions();
     }
-  }, [router.query.tag, sortType]);
+  }, [router.query.tag, router.query.page, sortType]);
 
   const handlePageClick = (event) => {
     if (router.query.tag) {
-      fetchDiscussionsByTag(event.selected+1);
+      router.push(`/discussions?tag=${router.query.tag}&page=${event.selected+1}`);
     } else {
-      fetchDiscussions(event.selected+1);
+      router.push(`/discussions?page=${event.selected+1}`);
     }
   };
 
