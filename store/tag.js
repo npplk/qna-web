@@ -1,24 +1,23 @@
-import { useRouter } from 'next/router'
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect, useContext } from 'react'
 
 import { publicFetch } from '../util/fetcher'
+import { ThreadContext } from './thread'
 
 const TagContext = createContext()
 const { Provider } = TagContext
 
 const TagProvider = ({ children }) => {
-  const [tagState, setTagState] = useState(null)
-  const router = useRouter();
+  const [tagState, setTagState] = useState(null);
+  const { threadState } = useContext(ThreadContext);
 
   useEffect(() => {
     const fetchPopularTags = async () => {
-      const threadType = router.pathname === "/" ? "/questions" : router.pathname;
-      const { data } = await publicFetch.get(`/tags${threadType}/populertags`)
+      const { data } = await publicFetch.get(`/tags/populertags/${threadState}`)
       setTagState(data)
     }
 
     fetchPopularTags()
-  }, [router.pathname])
+  }, [threadState])
 
   return <Provider value={{ tagState }}>{children}</Provider>
 }

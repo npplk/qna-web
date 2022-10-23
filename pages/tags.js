@@ -18,7 +18,7 @@ function TagsPage() {
   useEffect(() => {
     if (searchTerm === null) {
       const fetchUser = async () => {
-        const { data } = await publicFetch.get('/tags')
+        const { data } = await publicFetch.get('/tags/questions')
         setTags(data)
       }
 
@@ -27,7 +27,7 @@ function TagsPage() {
       const delayDebounceFn = setTimeout(async () => {
         setLoading(true)
         const { data } = await publicFetch.get(
-          searchTerm ? `/tags/${searchTerm}` : `/tags`
+          searchTerm ? `/tags/search/${searchTerm}` : `/tags/questions`
         )
         setTags(data)
         setLoading(false)

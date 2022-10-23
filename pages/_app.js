@@ -7,6 +7,7 @@ import ModalContext from '../store/modal'
 import { AuthProvider } from '../store/auth'
 import { FetchProvider } from '../store/fetch'
 import { TagProvider } from '../store/tag'
+import { ThreadProvider } from '../store/thread'
 
 import Modal from '../components/modal'
 import AuthForms from '../components/auth-forms'
@@ -15,6 +16,7 @@ import '../styles/variables.css'
 import '../styles/nprogress.css'
 import 'react-tagsinput/react-tagsinput.css'
 import '../styles/app.css'
+
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
@@ -40,14 +42,16 @@ function MyApp({ Component, pageProps }) {
     >
       <AuthProvider>
         <FetchProvider>
-          <TagProvider>
-            <Component {...pageProps} />
-            {isComponentVisible && (
-              <Modal>
-                <AuthForms screen={authScreen} />
-              </Modal>
-            )}
-          </TagProvider>
+          <ThreadProvider>
+            <TagProvider>
+              <Component {...pageProps} />
+                {isComponentVisible && (
+                  <Modal>
+                    <AuthForms screen={authScreen} />
+                  </Modal>
+                )}
+            </TagProvider>
+          </ThreadProvider>
         </FetchProvider>
       </AuthProvider>
     </ModalContext.Provider>

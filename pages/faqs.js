@@ -120,10 +120,10 @@ const FaqsPage = () => {
               <ThreadStats
                 voteCount={votes.length}
                 view={views}
-                threadType={THREAD_TYPE.FAQ}
+                threadType={THREAD_TYPE.FAQS}
               />
               <ThreadSummary
-                type={THREAD_TYPE.FAQ}
+                type={THREAD_TYPE.FAQS}
                 id={id}
                 title={title}
                 tags={tags}

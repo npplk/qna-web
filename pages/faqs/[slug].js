@@ -54,7 +54,7 @@ const FaqDetail = ({ faqId, title }) => {
               <PostVote
                 score={faq.score}
                 votes={faq.votes}
-                threadType={THREAD_TYPE.FAQ}
+                threadType={THREAD_TYPE.FAQS}
                 threadId={faqId}
                 setThread={setFaq}
               />
@@ -62,7 +62,7 @@ const FaqDetail = ({ faqId, title }) => {
                 tags={faq.tags}
                 author={faq.author}
                 created={faq.created}
-                threadType={THREAD_TYPE.FAQ}
+                threadType={THREAD_TYPE.FAQS}
                 threadId={faqId}
                 isUserDetailsVisible={false}
               >
@@ -77,7 +77,7 @@ const FaqDetail = ({ faqId, title }) => {
               <PostSummary
                 author={faq.author}
                 created={faq.created}
-                threadType={THREAD_TYPE.FAQ}
+                threadType={THREAD_TYPE.FAQS}
                 threadId={faqId}
                 isUserDetailsVisible={false}
               >

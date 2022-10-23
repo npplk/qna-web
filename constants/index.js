@@ -6,5 +6,5 @@ export default {
 export const THREAD_TYPE = {
   QUESTIONS: 'questions',
   DISCUSSIONS: 'discussions',
-  FAQ: 'faqs',
+  FAQS: 'faqs',
 };
