@@ -80,7 +80,7 @@ const HomePage = () => {
 
   const handlePageClick = (event) => {
     if (router.query.tag) {
-      fetchQuestionByTag();
+      fetchQuestionByTag(event.selected+1);
     } else {
       fetchQuestion(event.selected+1);
     }
