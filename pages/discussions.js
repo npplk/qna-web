@@ -12,45 +12,80 @@ import PageTitle from '../components/page-title'
 import ButtonGroup from '../components/button-group'
 import { Spinner } from '../components/icons'
 import { THREAD_TYPE } from '../constants'
+import { getSortingParam } from '../util/util'
+import ReactPaginate from 'react-paginate'
 
 const DiscussionsPage = () => {
   const router = useRouter()
 
   const [discussions, setDiscussions] = useState(null);
-  const [sortType, setSortType] = useState('Votes');
+  const [sortType, setSortType] = useState('Newest');
+
+  const [paging, setPaging] = useState({
+    page: 1,
+    count: 0,
+    limit: 10,
+    totalPages: 0
+  });
+
+  const fetchDiscussions = async (pageNo = 1) => {
+    const { data } = await publicFetch.get('/discussions', { 
+      params: { 
+        page: pageNo,
+        sort: getSortingParam(sortType),
+      }
+    });
+    setDiscussions(data.docs);
+    setPaging({
+      page: data.page,
+      count: data.totalDocs,
+      limit: data.limit,
+      totalPages: data.totalPages
+    });
+
+    router.push(`/discussions?page=${data.page}`, undefined, { shallow: true });
+  }
+
+  const fetchDiscussionsByTag = async (pageNo = 1) => {
+    const { data } = await publicFetch.get(`/discussions/${router.query.tag}`, { 
+      params: { 
+        page: pageNo,
+        sort: getSortingParam(sortType),
+      }
+    });
+    setDiscussions(data.docs);
+    setPaging({
+      page: data.page,
+      count: data.totalDocs,
+      limit: data.limit,
+      totalPages: data.totalPages
+    });
+
+    router.push(`/discussions?tag=${router.query.tag}&page=${data.page}`, undefined, { shallow: true });
+  }
 
   useEffect(() => {
-    const fetchDiscussions = async () => {
-      const { data } = await publicFetch.get('/discussions');
-      setDiscussions(data);
-    }
-
-    const fetchDiscussionsByTag = async () => {
-      const { data } = await publicFetch.get(`/discussions/${router.query.tag}`);
-      setDiscussions(data)
-    }
+    setPaging({
+      page: 1,
+      count: 0,
+      limit: 10,
+      totalPages: 0
+    });
 
     if (router.query.tag) {
       fetchDiscussionsByTag();
     } else {
       fetchDiscussions();
     }
-  }, [router.query.tag]);
+  }, [router.query.tag, sortType]);
 
-  const handleSorting = () => {
-    switch (sortType) {
-      case 'Votes':
-        return (a, b) => b.score - a.score
-      case 'Views':
-        return (a, b) => b.views - a.views
-      case 'Newest':
-        return (a, b) => new Date(b.created) - new Date(a.created)
-      case 'Oldest':
-        return (a, b) => new Date(a.created) - new Date(b.created)
-      default:
-        break
+  const handlePageClick = (event) => {
+    if (router.query.tag) {
+      fetchDiscussionsByTag(event.selected+1);
+    } else {
+      fetchDiscussions(event.selected+1);
     }
-  }
+  };
 
   return (
     <Layout>
@@ -80,8 +115,7 @@ const DiscussionsPage = () => {
       )}
 
       {discussions
-        ?.sort(handleSorting())
-        .map(
+        ?.map(
           ({
             id,
             votes,
@@ -113,6 +147,25 @@ const DiscussionsPage = () => {
             </ThreadWrapper>
           )
         )}
+        {paging.count &&
+          <ReactPaginate
+            forcePage={paging.page-1}
+            previousLabel="<"
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={paging.totalPages}
+            renderOnZeroPageCount={null}
+            containerClassName="paging-ul"
+            pageClassName="paging-li"
+            previousClassName="paging-li"
+            nextClassName="paging-li"
+            pageLinkClassName="paging-link"
+            previousLinkClassName="paging-link"
+            nextLinkClassName="paging-link"
+            activeClassName="current-page"
+          />}
     </Layout>
   )
 }

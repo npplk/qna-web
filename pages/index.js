@@ -12,6 +12,7 @@ import PageTitle from '../components/page-title'
 import ButtonGroup from '../components/button-group'
 import { Spinner } from '../components/icons'
 import { THREAD_TYPE } from '../constants'
+import { getSortingParam } from '../util/util';
 
 const HomePage = () => {
   const router = useRouter()
@@ -26,79 +27,63 @@ const HomePage = () => {
   })
   const [sortType, setSortType] = useState('Newest')
 
-  useEffect(() => {
-    const fetchQuestion = async () => {
-      const { data } = await publicFetch.get('/questions', { 
-        params: { 
-          page,
-          sort: getSortingParam(sortType),
-        }
-      })
-      setQuestions(data.docs)
-      setPaging({
-        page: data.page,
-        count: data.totalDocs,
-        limit: data.limit,
-        totalPages: data.totalPages
-      })
+  const fetchQuestion = async (pageNo = 1) => {
+    const { data } = await publicFetch.get('/questions', { 
+      params: { 
+        page: pageNo,
+        sort: getSortingParam(sortType),
+      }
+    })
+    setQuestions(data.docs);
+    setPaging({
+      page: data.page,
+      count: data.totalDocs,
+      limit: data.limit,
+      totalPages: data.totalPages
+    });
 
-      router.push(`/?page=${data.page}`, undefined, { shallow: true });
-    }
-
-    const fetchQuestionByTag = async () => {
-      const { data } = await publicFetch.get(`/questions/${router.query.tag}`,{ 
-        params: { 
-          page,
-          sort: getSortingParam(sortType),
-        }
-      })
-      setQuestions(data.docs)
-      setPaging({
-        page: data.page,
-        count: data.totalDocs,
-        limit: data.limit,
-        totalPages: data.totalPages
-      })
-
-      router.push(`/?tag=${router.query.tag}&page=${data.page}`, undefined, { shallow: true });
-    }
-
-    if (router.query.tag) {
-      fetchQuestionByTag()
-    } else {
-      fetchQuestion()
-    }
-
-  }, [router.query.tag, page, sortType])
-
-  const getSortingParam = () => {
-    switch (sortType) {
-      case 'Votes':
-        return '-score'
-      case 'Views':
-        return '-views'
-      case 'Newest':
-        return '-created'
-      case 'Oldest':
-        return 'created'
-      default:
-        break
-    }
+    router.push(`/?page=${data.page}`, undefined, { shallow: true });
   }
+  
+  const fetchQuestionByTag = async (pageNo = 1) => {
+    const { data } = await publicFetch.get(`/questions/${router.query.tag}`, { 
+      params: { 
+        page: pageNo,
+        sort: getSortingParam(sortType),
+      }
+    })
+    setQuestions(data.docs);
+    setPaging({
+      page: data.page,
+      count: data.totalDocs,
+      limit: data.limit,
+      totalPages: data.totalPages
+    });
 
-  const handlePageClick = (event) => {
-    setPage(event.selected+1);
-  };
-
-  const _setSortType = (selected) => {
-    setPage(1);
-    setSortType(selected);
+    router.push(`/?tag=${router.query.tag}&page=${data.page}`, undefined, { shallow: true });
+  }
+  
+  useEffect(() => {
     setPaging({
       page: 1,
       count: 0,
       limit: 10,
       totalPages: 0
-    })
+    });
+
+    if (router.query.tag) {
+      fetchQuestionByTag();
+    } else {
+      fetchQuestion();
+    }
+  }, [router.query.tag, sortType]);
+
+  const handlePageClick = (event) => {
+    if (router.query.tag) {
+      fetchQuestionByTag();
+    } else {
+      fetchQuestion(event.selected+1);
+    }
   };
 
   return (
@@ -120,7 +105,7 @@ const HomePage = () => {
         borderBottom
         buttons={['Votes', 'Views', 'Newest', 'Oldest']}
         selected={sortType}
-        setSelected={_setSortType}
+        setSelected={setSortType}
       />
 
       {!questions && (
@@ -161,24 +146,25 @@ const HomePage = () => {
             </ThreadWrapper>
           )
         )}
-        {paging.count && <ReactPaginate
-          forcePage={paging.page-1}
-          previousLabel="<"
-          breakLabel="..."
-          nextLabel=">"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={paging.totalPages}
-          renderOnZeroPageCount={null}
-          containerClassName="paging-ul"
-          pageClassName="paging-li"
-          previousClassName="paging-li"
-          nextClassName="paging-li"
-          pageLinkClassName="paging-link"
-          previousLinkClassName="paging-link"
-          nextLinkClassName="paging-link"
-          activeClassName="current-page"
-        />}
+        {paging.count &&
+          <ReactPaginate
+            forcePage={paging.page-1}
+            previousLabel="<"
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={paging.totalPages}
+            renderOnZeroPageCount={null}
+            containerClassName="paging-ul"
+            pageClassName="paging-li"
+            previousClassName="paging-li"
+            nextClassName="paging-li"
+            pageLinkClassName="paging-link"
+            previousLinkClassName="paging-link"
+            nextLinkClassName="paging-link"
+            activeClassName="current-page"
+          />}
     </Layout>
   )
 }
