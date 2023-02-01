@@ -19,7 +19,7 @@ const SignupForm = () => {
 
   return (
     <Formik
-      initialValues={{ username: '', password: '', passwordConfirmation: '' }}
+      initialValues={{ username: '', password: '' }}
       onSubmit={async (values, { setStatus, resetForm }) => {
         setLoading(true)
         try {
@@ -37,9 +37,6 @@ const SignupForm = () => {
         displayname: Yup.string()
           .required('Required')
           .max(30, 'Must be at most 30 characters long'),
-        email: Yup.string()
-          .required('Required')
-          .max(30, 'Must be at most 30 characters long'),
         username: Yup.string()
           .required('Required')
           .max(16, 'Must be at most 16 characters long')
@@ -48,10 +45,6 @@ const SignupForm = () => {
           .required('Required')
           .min(6, 'Must be at least 6 characters long')
           .max(50, 'Must be at most 50 characters long'),
-        passwordConfirmation: Yup.string().oneOf(
-          [Yup.ref('password'), null],
-          'Passwords must match'
-        )
       })}
     >
       {({
@@ -77,17 +70,6 @@ const SignupForm = () => {
             errorMessage={errors.displayname && errors.displayname}
           />
           <FormInput
-            label="Email"
-            type="text"
-            name="email"
-            autoComplete="off"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            hasError={touched.email && errors.email}
-            errorMessage={errors.email && errors.email}
-          />
-          <FormInput
             label="Username"
             type="text"
             name="username"
@@ -108,21 +90,6 @@ const SignupForm = () => {
             onBlur={handleBlur}
             hasError={touched.password && errors.password}
             errorMessage={errors.password && errors.password}
-          />
-          <FormInput
-            label="Password Confirm"
-            type="password"
-            name="passwordConfirmation"
-            autoComplete="off"
-            value={values.passwordConfirmation}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            hasError={
-              touched.passwordConfirmation && errors.passwordConfirmation
-            }
-            errorMessage={
-              errors.passwordConfirmation && errors.passwordConfirmation
-            }
           />
           <p className={styles.status}>{status}</p>
           <Button
