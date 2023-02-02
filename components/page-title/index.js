@@ -7,7 +7,7 @@ import Button from '../button'
 
 import styles from './page-title.module.css'
 
-const PageTitle = ({ title, create, createComp, adminOnly = false, borderBottom = true, start, children }) => {
+const PageTitle = ({ title, create, createComp, adminOnly = false, borderBottom = true, children }) => {
   const { isAuthenticated, isAdmin } = useContext(AuthContext)
 
   return (
