@@ -59,7 +59,7 @@ const Header = ({ className, ...props }) => {
                 <a>{authState.userInfo.displayname} </a>
               </Link>
             </p>
-            <a onClick={() => logout()}>log out</a>
+            <a onClick={() => logout()}>Log out</a>
           </div>
         ) : (
           <>
