@@ -135,7 +135,7 @@ const FaqsPage = () => {
             </ThreadWrapper>
           )
         )}
-        {paging.count &&
+        {paging.count>0 &&
           <ReactPaginate
             forcePage={paging.page-1}
             previousLabel="<"

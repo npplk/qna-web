@@ -19,7 +19,7 @@ import { AuthContext } from '../../store/auth'
 const QuestionDetail = ({ questionId, title }) => {
   const [question, setQuestion] = useState(null)
   const [answerSortType, setAnswersSortType] = useState('Votes')
-  const { isAdmin } = useContext(AuthContext)
+  const { isStaff } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -152,7 +152,7 @@ const QuestionDetail = ({ questionId, title }) => {
                 ))}
               </AnswerContainer>
             )}
-            {question.answers.length == 0 && isAdmin() && (
+            {question.answers.length == 0 && isStaff() && (
               <AddResponse
                 tags={question.tags}
                 threadType={THREAD_TYPE.QUESTIONS}

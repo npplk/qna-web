@@ -48,6 +48,7 @@ const FaqDetail = ({ faqId, title }) => {
             <PageTitle
               title={faq.title}
               create="Add FAQ"
+              adminOnly={true}
               createComp="/faqs/add"
             />
             <PostWrapper key="faq-question" borderBottom={false}>
