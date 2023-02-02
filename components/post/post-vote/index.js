@@ -22,23 +22,25 @@ const PostVote = ({ score, votes, threadType, threadId, answerId, setThread }) =
     return votes.find((v) => v.user === authState.userInfo?.id)?.vote === -1
   }
 
+  const post = answerId? `${threadType}/${threadId}/${answerId}` : `${threadType}/${threadId}`;
+
   const upVote = async () => {
     const { data } = await authAxios.get(
-      `/votes/upvote/${threadType}/${threadId}/${answerId ? answerId : ''}`
+      answerId ? `/votes/upvote/${post}` : `/votes/upvote/${post}`
     )
     setThread(data)
   }
 
   const downVote = async () => {
     const { data } = await authAxios.get(
-      `/votes/downvote/${threadType}/${threadId}/${answerId ? answerId : ''}`
+      answerId ? `/votes/downvote/${post}` : `/votes/downvote/${post}`
     )
     setThread(data)
   }
 
   const unVote = async () => {
     const { data } = await authAxios.get(
-      `/votes/unvote/${threadType}/${threadId}/${answerId ? answerId : ''}`
+      answerId ? `/votes/unvote/${post}` : `/votes/unvote/${post}`
     )
     setThread(data)
   }
