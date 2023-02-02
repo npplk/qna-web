@@ -1,7 +1,7 @@
 {
-  "name": "client",
+  "name": "npp-qna-client",
   "version": "1.0.0",
-  "description": "",
+  "description": "NPP QNA Client",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -12,9 +12,8 @@
     "build-storybook": "build-storybook",
     "icon": "svgr icons -d components/icons --icon --replace-attr-values \"#000=currentColor\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["NPP"],
+  "author": "Team Savikalpa",
   "dependencies": {
     "axios": "^0.21.1",
     "babel-plugin-react-require": "^3.1.3",
