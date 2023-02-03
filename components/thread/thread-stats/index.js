@@ -16,7 +16,7 @@ const ThreadStats = ({ voteCount, answerCount = null, threadType, view }) => {
         </div> : 
         <div className={styles.answer}>
           <span>{answerCount}</span>
-          <p>{answerCount > 1 ? `${answerCount} replies` : "1 reply"}</p>
+          <p>{answerCount > 1 ? "replies" : "reply"}</p>
         </div>)
       }
       <p className={styles.view}>{view} views</p>
