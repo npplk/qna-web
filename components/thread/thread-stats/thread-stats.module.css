@@ -32,6 +32,10 @@
     font-size: 20px;
     color: var(--black-500);
   }
+
+  .answered {
+    color: var(--theme-main-color);
+  }
 }
 
 .view {
