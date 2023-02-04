@@ -17,6 +17,7 @@
   ],
   "author": "Team Savikalpa",
   "dependencies": {
+    "@vercel/analytics": "^0.1.8",
     "axios": "^0.21.1",
     "babel-plugin-react-require": "^3.1.3",
     "classnames": "^2.2.6",

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Router from 'next/router'
 import NProgress from 'nprogress'
+import { Analytics } from '@vercel/analytics/react';
 
 import useComponentVisible from '../hooks/useComponentVisible'
 import ModalContext from '../store/modal'
@@ -50,6 +51,7 @@ function MyApp({ Component, pageProps }) {
                     <AuthForms screen={authScreen} />
                   </Modal>
                 )}
+                <Analytics />
             </TagProvider>
           </ThreadProvider>
         </FetchProvider>
