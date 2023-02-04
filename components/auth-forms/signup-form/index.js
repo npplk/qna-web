@@ -19,7 +19,7 @@ const SignupForm = () => {
 
   return (
     <Formik
-      initialValues={{ username: '', password: '' }}
+      initialValues={{ displayname: '', email: '', username: '', password: '' }}
       onSubmit={async (values, { setStatus, resetForm }) => {
         setLoading(true)
         try {
@@ -38,6 +38,9 @@ const SignupForm = () => {
           .required('Required')
           .min(4, 'Must be at least 4 characters long')
           .max(30, 'Must be at most 30 characters long'),
+        email: Yup.string()
+          .email('Must be a valid email')
+          .required('Required'),
         username: Yup.string()
           .required('Required')
           .min(4, 'Must be at least 4 characters long')
@@ -70,6 +73,17 @@ const SignupForm = () => {
             onBlur={handleBlur}
             hasError={touched.displayname && errors.displayname}
             errorMessage={errors.displayname && errors.displayname}
+          />
+          <FormInput
+            label="Email"
+            type="text"
+            name="email"
+            autoComplete="off"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            hasError={touched.email && errors.email}
+            errorMessage={errors.email && errors.email}
           />
           <FormInput
             label="Username"
