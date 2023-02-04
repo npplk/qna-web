@@ -12,7 +12,9 @@
     "build-storybook": "build-storybook",
     "icon": "svgr icons -d components/icons --icon --replace-attr-values \"#000=currentColor\""
   },
-  "keywords": ["NPP"],
+  "keywords": [
+    "NPP"
+  ],
   "author": "Team Savikalpa",
   "dependencies": {
     "axios": "^0.21.1",
@@ -20,7 +22,7 @@
     "classnames": "^2.2.6",
     "date-fns": "^2.15.0",
     "formik": "^2.1.5",
-    "next": "^9.4.4",
+    "next": "^10.2.3",
     "nprogress": "^0.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
