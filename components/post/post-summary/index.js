@@ -26,7 +26,7 @@ const PostSummary = ({
   const { authAxios } = useContext(FetchContext)
   const router = useRouter()
 
-  const handleDeleteComment = async () => {
+  const handleDelete = async () => {
     const res = window.confirm('Are you sure delete your post?')
     if (res) {
       const { data } = await authAxios.delete(
@@ -77,7 +77,11 @@ const PostSummary = ({
         </div>
         {(authState.userInfo?.id === author.id || isAdmin()) && (
           <div className={styles.row}>
-            <a className={styles.delete} onClick={() => handleDeleteComment()}>
+            <a className={styles.delete} onClick={() => handleDelete()}>
+              edit
+            </a>
+            |
+            <a className={styles.delete} onClick={() => handleDelete()}>
               delete
             </a>
           </div>
