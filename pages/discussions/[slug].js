@@ -164,7 +164,6 @@ const DiscussionDetail = ({ discussionId, title }) => {
               </AnswerContainer>
             )}
             <AddResponse
-              tags={discussion.tags}
               threadType={THREAD_TYPE.DISCUSSIONS}
               threadId={discussionId}
               setResponse={setDiscussion}

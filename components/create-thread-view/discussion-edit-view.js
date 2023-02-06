@@ -2,12 +2,12 @@ import React from 'react'
 
 import styles from './create-thread-view.module.css'
 
-const QuestionEditView = ({ children }) => {
+const DiscussionEditView = ({ children }) => {
   return (
     <div className={styles.layout}>
       <div className={styles.container}>
         <div className={styles.topForm}>
-          <h1>Edit question</h1>
+          <h1>Edit discussion</h1>
         </div>
         {children}
       </div>
@@ -15,4 +15,4 @@ const QuestionEditView = ({ children }) => {
   )
 }
 
-export default QuestionEditView
+export default DiscussionEditView

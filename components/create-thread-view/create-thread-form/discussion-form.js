@@ -11,8 +11,9 @@ import FormInput from '../../form-input'
 import TagInput from '../../tag-input'
 
 import styles from './create-thread-form.module.css'
+import slug from 'slug'
 
-const DiscussionForm = () => {
+const DiscussionForm = ({ discussion }) => {
   const router = useRouter()
   const { authAxios } = useContext(FetchContext)
 
@@ -20,13 +21,13 @@ const DiscussionForm = () => {
 
   return (
     <Formik
-      initialValues={{ title: '', text: '', tags: [] }}
+      initialValues={discussion || { title: '', text: '', tags: [] }}
       onSubmit={async (values, { setStatus, resetForm }) => {
         setLoading(true)
         try {
-          await authAxios.post('discussion', values)
+          const { data } = await authAxios.post(discussion ? `discussion/${discussion.id}` : 'discussion', values)
           resetForm({})
-          router.push('/discussions')
+          router.push('/discussions/[slug]', `/discussions/${data.id}-${slug(data.title)}`)
         } catch (error) {
           setStatus(error.response.data.message)
         }
@@ -105,7 +106,7 @@ const DiscussionForm = () => {
                 isLoading={loading}
                 disabled={isSubmitting}
               >
-                Post your discussion
+                {discussion ? "Update discussion" : "Post your discussion"}
               </Button>
             </div>
           </div>

@@ -10,7 +10,7 @@ import TextArea from '../textarea'
 import Button from '../button'
 import styles from './add-response.module.css'
 
-const AddResponse = ({ threadType, threadId, setResponse }) => {
+const EditResponse = ({ threadType, threadId, answerId, saveEdit, cancelEdit, text }) => {
   const { authAxios } = useContext(FetchContext)
   const { isAuthenticated } = useContext(AuthContext)
   const { handleComponentVisible } = useContext(ModalContext)
@@ -19,12 +19,12 @@ const AddResponse = ({ threadType, threadId, setResponse }) => {
 
   return (
     <Formik
-      initialValues={{ text: '' }}
+      initialValues={{ text }}
       onSubmit={async (values, { setStatus, resetForm }) => {
         setLoading(true)
         try {
-          const { data } = await authAxios.post(`/answer/${threadType}/${threadId}`, values)
-          setResponse(data)
+          const { data } = await authAxios.post(`/answer/${threadType}/${threadId}/${answerId}`, values)
+          saveEdit(data)
           resetForm({})
         } catch (error) {
           setStatus(error.response.data.message)
@@ -69,7 +69,14 @@ const AddResponse = ({ threadType, threadId, setResponse }) => {
               disabled={isSubmitting}
               onClick={() => !isAuthenticated() && handleComponentVisible(true, 'signup')}
             >
-              Post Your Answer
+              Save
+            </Button>
+            <Button
+              secondary
+              disabled={isSubmitting}
+              onClick={cancelEdit}
+            >
+              Cancel
             </Button>
           </div>
         </form>
@@ -78,4 +85,4 @@ const AddResponse = ({ threadType, threadId, setResponse }) => {
   )
 }
 
-export default AddResponse
+export default EditResponse

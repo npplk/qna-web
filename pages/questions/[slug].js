@@ -154,7 +154,6 @@ const QuestionDetail = ({ questionId, title }) => {
             )}
             {question.answers.length == 0 && isStaff() && (
               <AddResponse
-                tags={question.tags}
                 threadType={THREAD_TYPE.QUESTIONS}
                 threadId={questionId}
                 setResponse={setQuestion}

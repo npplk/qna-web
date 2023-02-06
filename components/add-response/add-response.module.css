@@ -16,6 +16,11 @@
   }
 }
 
+.button {
+  display: flex;
+  gap: 10px;
+}
+
 .textarea {
   height: 200px;
 }
