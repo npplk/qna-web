@@ -40,7 +40,6 @@ const UserAvatar = ({ username }) => {
           </div>
         )}
         {userInfo && <h2 className={styles.displayname}>{userInfo.displayname}</h2>}
-        <h4 className={styles.username}>({username})</h4>
         {!userInfo ? (
           <div className="loading">
             <Spinner />
